@@ -30,7 +30,7 @@ for state_name in all_states:
         plt.plot(days, model(days, *popt), 'g--')
         plt.xlabel(f'# days since {dates.min()}')
         plt.ylabel(f'total cases')
-        plt.savefig(f'images/{state_name}.png')
+        plt.savefig(f'nytimes/{state_name}.png')
         plt.close()
     
         initial_date_as_int = dates_as_int.min()
@@ -48,7 +48,7 @@ plt.scatter(days_so_far, national_cases)
 plt.plot(days, results, 'g--')
 plt.xlabel(f'# days since 1/21/2020')
 plt.ylabel(f'total cases')
-plt.savefig(f'images/all.png')
+plt.savefig(f'nytimes/all.png')
 plt.close()
 
 # popt, pcov = curve_fit(model, days_so_far, national_cases, p0=[500, 2, -3, 5])
