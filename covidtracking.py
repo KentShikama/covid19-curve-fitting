@@ -8,7 +8,7 @@ ASSUMED_RATIO = 0.03
 def model(x, a, b, c, d):
     return a * np.tanh(b * x + c) + d
 
-df = pd.read_csv("states-daily.csv").iloc[::-1]
+df = pd.read_json("https://covidtracking.com/api/states/daily").iloc[::-1]
 all_states = df.groupby("state")["state"].nunique().keys().to_numpy()
 national_initial_date = pd.to_datetime(df["date"].min(), format="%Y%m%d")
 national_initial_date_as_int = national_initial_date.timestamp() / 86400
