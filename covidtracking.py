@@ -24,6 +24,9 @@ for state_name in all_states:
     dates_as_int_array_normalized = dates_as_int_array - dates_as_int_array[0]
     cases = state["positive"].to_numpy()
     normalized_cases = state["positive"] * ((state["positive"] / state["totalTestResults"]) / ASSUMED_RATIO)
+    
+    if state_name == "WA":
+        normalized_cases = pd.concat([state["positive"][:5], normalized_cases[5:]])
 
     try:
         popt, pcov = curve_fit(model, dates_as_int_array_normalized, normalized_cases)
