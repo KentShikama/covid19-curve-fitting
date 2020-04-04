@@ -17,6 +17,7 @@ def run():
     national_initial_date_as_int = national_initial_date.timestamp() / 86400
     days = np.arange(1, DAYS_TO_PLOT)
 
+    ny_results_over_time = []
     results_over_time = []
     normalized_national_cases_over_time = []
     for lookback in range(LOOKBACK, -1, -1):
@@ -37,7 +38,8 @@ def run():
                 if lookback == 0:
                     plot_state_graph(cases, dates, dates_as_int_array_normalized, days, normalized_cases, popt, state_name)
                 state_result = compute_state_result(dates_as_int, days, national_initial_date_as_int, popt)
-                state_results.append(state_result[:len(days)])
+                if state_name != "NJ":
+                    state_results.append(state_result[:len(days)])
             except Exception as e:
                 print(e)
 
@@ -51,6 +53,7 @@ def run():
             plot_national_graph(days, days_so_far, national_cases, normalized_national_cases, results)
         normalized_national_cases_over_time.append(normalized_national_cases.iloc[-1])
         results_over_time.append(results)
+
     lookback_days = np.arange(0, LOOKBACK + 1)
     predicted_peaks = list(map(lambda g: g[-1], results_over_time))
     plt.title("Predicted peak case count nationally")
