@@ -5,7 +5,7 @@ from scipy.optimize import curve_fit
 
 ASSUMED_RATIO = 0.03
 DAYS_TO_PLOT = 150
-LOOKBACK = 13
+LOOKBACK = 15
 
 def model(x, a, b, c, d):
     return a * np.tanh(b * x + c) + d
