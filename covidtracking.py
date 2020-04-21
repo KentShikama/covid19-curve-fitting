@@ -38,8 +38,7 @@ def run():
                 if lookback == 0:
                     plot_state_graph(cases, dates, dates_as_int_array_normalized, days, normalized_cases, popt, state_name)
                 state_result = compute_state_result(dates_as_int, days, national_initial_date_as_int, popt)
-                if state_name != "NJ" and state_name != "MD" and state_name != "DE":
-                    state_results.append(state_result[:len(days)])
+                state_results.append(state_result[:len(days)])
             except Exception as e:
                 print(e)
 
