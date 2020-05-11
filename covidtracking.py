@@ -115,7 +115,14 @@ def plot_state_graph(cases, dates, dates_as_int_array_normalized, days,
     plt.savefig(f'covid_tracking_images/{state_name}.png', bbox_inches='tight')
     plt.close()
 
+def run_positive_rate():
+    df = pd.read_json("https://covidtracking.com/api/v1/us/daily.json")
+    positive_rate = df["positiveIncrease"] / df["totalTestResultsIncrease"]
+    positive_rate = positive_rate.iloc[::-1].reset_index(drop=True).dropna()[2:]
+    positive_rate.plot()
+    plt.title("Positive Test Rate (National)")
+    plt.savefig(f'covid_tracking_images/positive_rate.png', bbox_inches='tight')
 
 if __name__=="__main__":
     run()
-
+    run_positive_rate()
