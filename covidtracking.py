@@ -118,9 +118,12 @@ def plot_state_graph(cases, dates, dates_as_int_array_normalized, days,
 def run_positive_rate():
     df = pd.read_json("https://covidtracking.com/api/v1/us/daily.json")
     positive_rate = (df["positiveIncrease"] / df["totalTestResultsIncrease"]) * 100
-    positive_rate = positive_rate.iloc[::-1].reset_index(drop=True).dropna()[2:]
-    positive_rate.plot()
+    positive_rate = positive_rate.iloc[::-1].reset_index(drop=True).dropna()[2:].reset_index(drop=True)
     plt.title("Positive Test Rate (National)")
+    plt.scatter(positive_rate.index.values, positive_rate.values, 1)
+    plt.plot(positive_rate.index.values, positive_rate.rolling(10).mean().values, label=f"10 day rolling average")
+    plt.legend(loc=4)
+    plt.xlabel('# days since 3/1')
     plt.gca().yaxis.set_major_formatter(ticker.PercentFormatter())
     plt.savefig(f'covid_tracking_images/positive_rate.png', bbox_inches='tight')
 
