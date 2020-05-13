@@ -9,6 +9,7 @@ verify_ssl = true
 pandas = "*"
 matplotlib = "*"
 scipy = "*"
+ipdb = "*"
 
 [requires]
 python_version = "3.8"
