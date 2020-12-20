@@ -1,3 +1,5 @@
+See https://covid19.healthdata.org/global for more realistic projections.
+
 # Hackathon quality curve fitting for US covid19 cases
 
 - Assumes daily new cases follows a symmetric normal curve (no skew)
